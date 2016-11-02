@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Redis by renematos79</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Redis</h1>
+      <h2 class="project-tagline">redis, c#, in-memory, storage, database, struct</h2>
+      <a href="https://github.com/renematos79/redis" class="btn">View on GitHub</a>
+      <a href="https://github.com/renematos79/redis/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/renematos79/redis/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="o-que-é-o-redis" class="anchor" href="#o-que-%C3%A9-o-redis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>O que é o REDIS</h3>
+
+<p>Ele é um projeto aberto e serve para armazenamento de dados em memória... Calma! É possível também persistí-los em disco! E também é possível definir um tempo de vida para seus dados se necessário!
+As seguintes estruturas de dados são suportadas por ele: strings, hashes, listas, bitmaps, gesospatial indexes, etc. 
+Também é possível realizar a replicação de dados e configurar serviços de alta disponibilidade.
+Outra coisa bem legal é o serviço de mensageria que te permite notificar os clientes conectados quando determinados eventos acontecem.</p>
+
+<h3>
+<a id="agora-vamos-instalar-o-redis-no-windows" class="anchor" href="#agora-vamos-instalar-o-redis-no-windows" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Agora vamos instalar o REDIS no Windows</h3>
+
+<p><a href="https://github.com//MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi">Clique aqui</a> para fazer o download da versão 3.2.100 ou se preferir copie e cole o link abaixo em seu browser:
+<em><a href="https://github.com//MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi">https://github.com//MSOpenTech/redis/releases/download/win-3.2.100/Redis-x64-3.2.100.msi</a></em></p>
+
+<p>Destaquei algumas coisas importantes sobre a instalação:</p>
+
+<ul>
+<li>esta instalação já definirá o REDIS como um windows service e neste caso uma porta será definida para ele;</li>
+<li>é recomendado definir uma quantidade máxima de memória para que ele não fique indisponível devido a um erro do tipo OUT OF MEMORY por exemplo;</li>
+<li>após instalação, para proteger seus dados, também é recomendado definir uma senha para o seu serviço</li>
+</ul>
+
+<p>A instalação é bastante simples e você precisará definir apenas a porta e a quantidade máxima de memória.
+Após a instalação vá para o diretório onde o REDIS foi instalado e abra o arquivo <strong>C:\Program Files\Redis\redis.windows-service.conf</strong>
+Localize a linha <strong>requirepass</strong>, descomente-a e defina uma senha</p>
+
+<p><strong>requirepass</strong> prodesp@123</p>
+
+<p>Será necessário reiniciar o serviço e para isso você poderá abrir o DOS e executar</p>
+
+<ul>
+<li>net stop redis</li>
+<li>net start redis</li>
+</ul>
+
+<h3>
+<a id="usando-keys-getsetttlexpire" class="anchor" href="#usando-keys-getsetttlexpire" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usando KEYs (GET/SET/TTL/EXPIRE)</h3>
+
+<p>Agora vamos abrir um client terminal usando o programa redis-cli.exe dentro de C:\Program Files\Redis
+Observe que o endereço do seu servidor e a porta para conexão já estão definidos</p>
+
+<p>Vamos nos autenticar informando a senha prodesp@123
+Digite <strong>AUTH</strong> prodesp@123</p>
+
+<p>Agora vamos criar uma variável chamada myKey com valor 200, digite:</p>
+
+<p><strong>set</strong> myKey 200</p>
+
+<p>Para ler o valor da variável em seu banco digite</p>
+
+<p><strong>get</strong> myKey</p>
+
+<p>Próximo passo vamos definir um tempo de vida de 30 segundos para esta variável usando o comando </p>
+
+<p><strong>expire</strong> myKey 30</p>
+
+<p>Vamos ver o tempo restante de vida usando o comando </p>
+
+<p><strong>ttl</strong> myKey</p>
+
+<p>Quando a variável expirar, deixar de existir, e você digitar o comando get o retorno será NIL e não mais 200</p>
+
+<p>Esta é a URL contendo a lista de comandos suportados. Muito fácil e intuitivo - <a href="http://redis.io/commands">http://redis.io/commands</a></p>
+
+<h3>
+<a id="usando-redis-no-visual-studio-2015" class="anchor" href="#usando-redis-no-visual-studio-2015" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usando REDIS no Visual Studio 2015</h3>
+
+<p>Crie um novo projeto no Visual Studio do tipo Console Application
+Instale o pacote StackExchange.Redis que contém uma lib muito legal e de fácil uso
+Adicione ao using a linha using <strong>StackExchange.Redis</strong>;</p>
+
+<blockquote>
+<p>A conexão ao serviço poderá ser feita de duas formas:</p>
+</blockquote>
+
+<ul>
+<li>usando uma instância da classe ConfigurationOptions </li>
+<li>usando uma string com seus campos separados por ","</li>
+</ul>
+
+<p><code>var options = new ConfigurationOptions {</code>
+  <code>EndPoints = { { "127.0.0.1", 6379 } },</code>
+  <code>Password = "prodesp@123",</code>
+  <code>AllowAdmin = true, // este cara aqui diz ao REDIS que comandos de administração poderão ser executados</code>
+  <code>ClientName = "VS2015-REDIS"</code>
+<code>};</code></p>
+
+<p><code>var cm = ConnectionMultiplexer.Connect(options);</code>
+<code>var db = cm.GetDatabase();</code></p>
+
+<p><strong>// vamos criar uma variável myKey com valor 200</strong></p>
+
+<p><code>db.StringSet("myKey", "200");</code></p>
+
+<p><strong>// vamos definir o tempo de vida desta variável para 30 segundos</strong></p>
+
+<p><code>var when = new TimeSpan(0, 0, 30);</code>
+<code>db.KeyExpire("myKey", when);</code></p>
+
+<p><strong>// vamos ler o valor da variável</strong></p>
+
+<p><code>var value = db.StringGet("myKey");</code></p>
+
+<p><strong>// vamos verificar quanto tempo de vida ela ainda tem</strong></p>
+
+<p><code>var time = db.KeyTimeToLive("myKey").ToString();</code></p>
+
+<blockquote>
+<p>Como dever de casa aprendam a gravar os dados localmente, deletar variáveis, gerenciar listas, ordená-las, etc.</p>
+</blockquote>
+
+<h3>
+<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+
+<p>Autor: Renato Matos</p>
+
+<p>Linkedin: <a href="https://br.linkedin.com/in/renato-matos-2994b09">https://br.linkedin.com/in/renato-matos-2994b09</a></p>
+
+<p>E-mail: <a href="mailto:renato.matos79@gmail.com">renato.matos79@gmail.com</a></p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/renematos79/redis">Redis</a> is maintained by <a href="https://github.com/renematos79">renematos79</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
