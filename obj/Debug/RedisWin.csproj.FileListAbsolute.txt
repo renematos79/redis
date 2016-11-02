@@ -1,0 +1,11 @@
+D:\Projetos\REDIS\RedisWin\bin\Debug\RedisWin.exe.config
+D:\Projetos\REDIS\RedisWin\bin\Debug\RedisWin.exe
+D:\Projetos\REDIS\RedisWin\bin\Debug\RedisWin.pdb
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.csprojResolveAssemblyReference.cache
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.Form1.resources
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.Properties.Resources.resources
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.csproj.GenerateResource.Cache
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.exe
+D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.pdb
+D:\Projetos\REDIS\RedisWin\bin\Debug\StackExchange.Redis.dll
+D:\Projetos\REDIS\RedisWin\bin\Debug\StackExchange.Redis.xml
