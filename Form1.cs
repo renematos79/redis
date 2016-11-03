@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using Newtonsoft.Json;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,6 +44,10 @@ namespace RedisWin
             finally
             {
                 tabControl1.Enabled = cm != null && cm.IsConnected;
+                if (cm.IsConnected)
+                {
+                    RefreshContatos();
+                }
             }
         }
 
@@ -65,6 +70,65 @@ namespace RedisWin
         {
             var when = new TimeSpan(0, 0, int.Parse(txtValue.Text));
             db.KeyExpire(txtKey.Text, when);
+        }
+
+        private void RefreshContatos()
+        {
+            var values = db.ListRange("contatos");
+            var list = new List<Contato>();
+            if (values != null)
+            {
+                values.ToList().ForEach(v =>
+                {
+                    var contato = JsonConvert.DeserializeObject<Contato>(v);
+                    list.Add(contato);
+                });
+            }
+
+            dataGridView1.AutoGenerateColumns = true;
+            dataGridView1.DataSource = list.ToList();
+            dataGridView1.Refresh();
+        }
+
+        private void btnAddContato_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNome.Text))
+            {
+                MessageBox.Show("Informe um nome!");
+                return;
+            }
+
+            var contato = new Contato
+            {
+                Nome = txtNome.Text,
+                Email = txtEmail.Text,
+                Telefone = txtTelefone.Text
+            };
+
+            var json = JsonConvert.SerializeObject(contato);
+
+            db.ListRightPush("contatos", json);
+
+            RefreshContatos();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (cm != null)
+            {
+                cm.Dispose();
+            }
+        }
+
+        private void btnDelContato_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count > 0)
+            {
+                var contato = dataGridView1.SelectedRows[0].DataBoundItem as Contato;
+                var json = JsonConvert.SerializeObject(contato);
+                db.ListRemove("contatos", json);
+                RefreshContatos();
+            }
         }
     }
 }

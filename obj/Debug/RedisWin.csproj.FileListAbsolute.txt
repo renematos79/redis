@@ -9,3 +9,16 @@ D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.exe
 D:\Projetos\REDIS\RedisWin\obj\Debug\RedisWin.pdb
 D:\Projetos\REDIS\RedisWin\bin\Debug\StackExchange.Redis.dll
 D:\Projetos\REDIS\RedisWin\bin\Debug\StackExchange.Redis.xml
+D:\Projetos\REDIS\bin\Debug\RedisWin.exe.config
+D:\Projetos\REDIS\obj\Debug\RedisWin.exe
+D:\Projetos\REDIS\obj\Debug\RedisWin.pdb
+D:\Projetos\REDIS\bin\Debug\RedisWin.exe
+D:\Projetos\REDIS\bin\Debug\RedisWin.pdb
+D:\Projetos\REDIS\bin\Debug\Newtonsoft.Json.dll
+D:\Projetos\REDIS\bin\Debug\StackExchange.Redis.dll
+D:\Projetos\REDIS\bin\Debug\Newtonsoft.Json.xml
+D:\Projetos\REDIS\bin\Debug\StackExchange.Redis.xml
+D:\Projetos\REDIS\obj\Debug\RedisWin.csprojResolveAssemblyReference.cache
+D:\Projetos\REDIS\obj\Debug\RedisWin.Form1.resources
+D:\Projetos\REDIS\obj\Debug\RedisWin.Properties.Resources.resources
+D:\Projetos\REDIS\obj\Debug\RedisWin.csproj.GenerateResource.Cache
