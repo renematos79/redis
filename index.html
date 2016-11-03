@@ -135,6 +135,24 @@ Adicione ao using a linha using <strong>StackExchange.Redis</strong>;</p>
 </blockquote>
 
 <h3>
+<a id="configurando-a-replicação-de-dados" class="anchor" href="#configurando-a-replica%C3%A7%C3%A3o-de-dados" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configurando a replicação de dados</h3>
+
+<p>Se você deseja criar uma segunda máquina para replicar os seus dados você poderá realizar os seguintes passos:</p>
+
+<ul>
+<li>Digamos que escolhemos a máquina secundária com IP 10.1.0.3 na Porta 6379 e definimos a senha como masterRPL</li>
+<li>Em nossa máquina principal com IP 10.1.0.2 na Porta 6379 devemos alterar o arquivo de configuração as seguintes chaves</li>
+<li>
+<strong>slaveof</strong> 10.1.0.3 6379</li>
+<li>
+<strong>masterauth</strong> masterRPL</li>
+</ul>
+
+<blockquote>
+<p>Com isso termos uma replicação dos dados modificados ou inseridos em 10.1.0.2 para a máquina 10.1.0.3</p>
+</blockquote>
+
+<h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
 <p>Autor: Renato Matos</p>
